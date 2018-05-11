@@ -48,9 +48,9 @@ function doStep(name, step)
     if back_pos then
       srClickMouse(back_pos[0], back_pos[1], false, 50, 100, 50);
       moveMouse();
-      sleepWithStatus(500, "Dismissed back button (" .. count .. ")", 0xFFFFFFff, true);
+      sleepWithStatus(500, "Dismissed back button (" .. count .. ")", 0xFFFFFFff);
     else
-      sleepWithStatus(500, "Saw quit, but not back (" .. count .. ")", 0xFFFFFFff, true);
+      sleepWithStatus(500, "Saw quit, but not back (" .. count .. ")", 0xFFFFFFff);
     end
     count = count + 1;
     srReadScreen();
@@ -96,7 +96,7 @@ function step(name, step)
       jump_to_step = false;
     else
       -- continue;
-      sleepWithStatus(1, "Seeking step " .. jump_to_step .. ", cur=" .. key, 0xFFFFFFff, true);
+      sleepWithStatus(1, "Seeking step " .. jump_to_step .. ", cur=" .. key, 0xFFFFFFff);
       return;
     end
   end
@@ -130,7 +130,7 @@ function step(name, step)
             start_time = lsGetTimer();
           else
             if lsGetTimer() - start_time > step.timeout then
-              sleepWithStatus(10, "Skipping...", 0xFFFFFFff, true);
+              sleepWithStatus(10, "Skipping...", 0xFFFFFFff);
               return;
             end
           end
@@ -156,14 +156,14 @@ function step(name, step)
       y = y + 32;
     end
     if lsButtonText(10, y, 1, 150, 0xFFFFFFff, "Next step") then
-      sleepWithStatus(10, "Skipping...", 0xFFFFFFff, true);
+      sleepWithStatus(10, "Skipping...", 0xFFFFFFff);
       return;
     end
     y = y + 32;
     if prev_step then
       if lsButtonText(10, y, 1, 150, 0xFFFFFFff, "Prev step") then
         jump_to_step = prev_step;
-        sleepWithStatus(10, "Skipping...", 0xFFFFFFff, true);
+        sleepWithStatus(10, "Skipping...", 0xFFFFFFff);
         return;
       end
     end
@@ -191,7 +191,7 @@ function step(name, step)
         end
 
         if is_done then
-          sleepWithStatus(100, "Step complete (found image)", 0xFFFFFFff, true);
+          sleepWithStatus(100, "Step complete (found image)", 0xFFFFFFff);
           return;
         else
           message = "Could not find done image ";
@@ -205,19 +205,19 @@ function step(name, step)
             message = "Timed out";
             if step.skip_if_no then
               if not findImage(step.skip_if_no) then
-                sleepWithStatus(10, "Skipping...", 0xFFFFFFff, true);
+                sleepWithStatus(10, "Skipping...", 0xFFFFFFff);
                 return;
               end
             end
           end
         end
       else
-        sleepWithStatus(100, "Step complete", 0xFFFFFFff, true);
+        sleepWithStatus(100, "Step complete", 0xFFFFFFff);
         return;
       end
     end
 
-    sleepWithStatus(10, message, 0xFFFFFFff, true);
+    sleepWithStatus(10, message, 0xFFFFFFff);
   end
 end
 
